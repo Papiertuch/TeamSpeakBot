@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TeamSpeakBot-NameTags">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="TeamSpeakBot-NameTags.jar">
+      <element id="module-output" name="teamspeakbot-nametags" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,4 @@
+name: TeamSpeakBot-Proxy
+version: 1.8
+author: Papiertuch
+main: de.papiertuch.teamspeakbot.proxy.TeamSpeakBot

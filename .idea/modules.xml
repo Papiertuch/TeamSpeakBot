@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TeamSpeakBot.iml" filepath="$PROJECT_DIR$/TeamSpeakBot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/teamspeakbot-bukkit/teamspeakbot-bukkit.iml" filepath="$PROJECT_DIR$/teamspeakbot-bukkit/teamspeakbot-bukkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/teamspeakbot-nametags/teamspeakbot-nametags.iml" filepath="$PROJECT_DIR$/teamspeakbot-nametags/teamspeakbot-nametags.iml" />
+      <module fileurl="file://$PROJECT_DIR$/teamspeakbot-proxy/teamspeakbot-proxy.iml" filepath="$PROJECT_DIR$/teamspeakbot-proxy/teamspeakbot-proxy.iml" />
+    </modules>
+  </component>
+</project>

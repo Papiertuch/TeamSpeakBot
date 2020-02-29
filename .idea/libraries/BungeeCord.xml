@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="BungeeCord">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Library´s/BungeeCord.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Library´s/CloudNetAPI.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Library´s/teamspeak3-api-1.2.0-with-dependencies.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Library´s/spigot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Library´s/okio-1.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Library´s/okhttp-3.10.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Library´s/json-20180813.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Library´s/spigot.jar!/" />
+    </SOURCES>
+  </library>
+</component>

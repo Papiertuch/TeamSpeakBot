@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TeamSpeakBot">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="TeamSpeakBot.jar">
+      <element id="module-output" name="teamspeakbot-proxy" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Library´s/okio-1.14.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Library´s/okhttp-3.10.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Library´s/teamspeak3-api-1.2.0-with-dependencies.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Library´s/json-20180813.jar" path-in-jar="/" />
+      <element id="module-output" name="teamspeakbot-bukkit" />
+    </root>
+  </artifact>
+</component>
