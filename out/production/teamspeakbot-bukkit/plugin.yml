@@ -1,7 +1,0 @@
-name: TeamSpeakBot-Bukkit
-version: 1.8
-main: de.papiertuch.teamspeakbot.bukkit.TeamSpeakBot
-author: Papiertuch
-website: https://daspapiertuch.de/
-commands:
-  verify:
