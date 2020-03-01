@@ -2,10 +2,10 @@ package de.papiertuch.teamspeakbot.bukkit.commands;
 
 import de.papiertuch.teamspeakbot.bukkit.TeamSpeakBot;
 import de.papiertuch.teamspeakbot.bukkit.utils.VerifyHandler;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  * Created by Leon on 29.02.2020.
@@ -17,7 +17,7 @@ public class VerifyCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-            ProxiedPlayer player = (ProxiedPlayer)commandSender;
+            Player player = (Player)commandSender;
             if (args.length == 0) {
                 if (!TeamSpeakBot.getInstance().getVerifyHandler().isVerify(player.getUniqueId())) {
                     TeamSpeakBot.getInstance().getTs3ApiAsync().getClients().onSuccess(clients -> clients.forEach(client -> {
