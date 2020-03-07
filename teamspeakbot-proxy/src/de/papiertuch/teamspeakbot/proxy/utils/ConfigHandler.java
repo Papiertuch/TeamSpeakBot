@@ -97,12 +97,12 @@ public class ConfigHandler {
             configuration.set("module.vpn.apiKey", "https://iphub.info/apiKey/newFree create a Free ApiKey");
 
             configuration.set("message.teamSpeak.alreadyVerify", "You or the player is verified");
-            configuration.set("message.teamSpeak.clientDescription", "Name: %name% | UUID: %uuid% | ID: %teamSpeakId%");
+            configuration.set("message.teamSpeak.clientDescription", "Name: %name% | UUID: %uuid%");
             configuration.set("message.teamSpeak.syntax", "Usage: !verify <Name>");
             configuration.set("message.teamSpeak.notOnline", "The player is not online");
             configuration.set("message.teamSpeak.load", "You are verified now");
             configuration.set("message.teamSpeak.supportNotify", "%clients% waits on %channel% ");
-            configuration.set("message.teamSpeak.supportJoin", "There are %amount% team member online");
+            configuration.set("message.teamSpeak.supportJoin", "A team member was notified");
             configuration.set("message.teamSpeak.kickReason", "You were kicked because of the usage of VPN from the server");
             configuration.set("message.teamSpeak.info", "You are not verified! To verify write me !verify <name>");
             configuration.set("message.teamSpeak.request", "A request has been sent to Ingame to client %client%");
@@ -113,7 +113,7 @@ public class ConfigHandler {
             configuration.set("message.inGame.hoverAccept", "&a&lAccept");
             configuration.set("message.inGame.notVerify", "%prefix% &cYou are not verified");
             configuration.set("message.inGame.synchronize", "%prefix% &7Account is being syncedt...");
-            configuration.set("message.inGame.load", "%prefix% &7DYour account have been &a&lloaded");
+            configuration.set("message.inGame.load", "%prefix% &7Your account have been &a&lloaded");
             configuration.set("message.inGame.notOnline", "%prefix% &cYou are not online...");
             configuration.set("message.inGame.message", "%prefix% &7To verify yourself you must write to me on &6&lTeamSpeak");
             configuration.set("message.inGame.noRequest", "%prefix% &cYou do not have any requests");
@@ -121,7 +121,7 @@ public class ConfigHandler {
             configuration.set("message.inGame.deny", "%prefix% &cYou have deny the request");
             configuration.set("message.inGame.request", "%prefix% &6&l%client% &7wants to connect with you");
             configuration.set("message.inGame.delete", "%prefix% &7You have &c&ldeleted &7your account");
-            configuration.set("message.inGame.requestTest", "%prefix% &7Accept with » ");
+            configuration.set("message.inGame.requestTest", "%prefix% &7Accept with &8» ");
             configuration.set("message.inGame.syntax", "%prefix% &7Use&8: /&bverify update&8/&baccept&8/&bdeny&8/&bdelete");
 
             try (OutputStreamWriter outputStreamWriter = new OutputStreamWriter(Files.newOutputStream(Paths.get("plugins/TeamSpeakBot/config.yml")), StandardCharsets.UTF_8)) {
@@ -174,6 +174,10 @@ public class ConfigHandler {
             cacheBoolean.put(string, configuration.getBoolean(string));
         }
         return cacheBoolean.get(string);
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
     }
 
     public String getString(String string) {

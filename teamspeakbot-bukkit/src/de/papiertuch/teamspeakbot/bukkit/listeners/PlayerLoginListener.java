@@ -35,17 +35,20 @@ public class PlayerLoginListener implements Listener {
             }
         }
         if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.enable")) {
-            if (TeamSpeakBot.getInstance().getVerifyHandler().isExists(event.getPlayer().getUniqueId())) {
-                if (TeamSpeakBot.getInstance().getTs3ApiAsync().isClientOnline(TeamSpeakBot.getInstance().getVerifyHandler().getTeamSpeakId(player.getUniqueId())).getUninterruptibly()) {
-                    String rank = String.valueOf(TeamSpeakBot.getInstance().getVerifyHandler().getCurrentRank(player));
-                    if (!TeamSpeakBot.getInstance().getVerifyHandler().getRank(player.getUniqueId()).equalsIgnoreCase(rank)) {
-                        Bukkit.getScheduler().runTaskLater(TeamSpeakBot.getInstance(), (Runnable) new Runnable() {
-                            @Override
-                            public void run() {
+            if (TeamSpeakBot.getInstance().getVerifyHandler().isExists(player.getUniqueId())) {
+                int rank = TeamSpeakBot.getInstance().getVerifyHandler().getCurrentRank(player);
+                if (TeamSpeakBot.getInstance().getVerifyHandler().getRank(player.getUniqueId()) != rank) {
+                    Bukkit.getScheduler().runTaskLater(TeamSpeakBot.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            if (TeamSpeakBot.getInstance().getTs3ApiAsync().isClientOnline(TeamSpeakBot.getInstance().getVerifyHandler().getTeamSpeakId(player.getUniqueId())).getUninterruptibly()) {
                                 TeamSpeakBot.getInstance().getVerifyHandler().setClientGroups(player.getUniqueId());
+                            } else {
+                                TeamSpeakBot.getInstance().getVerifyHandler().setNewRank(player.getUniqueId(), rank);
                             }
-                        }, 20);
-                    }
+
+                        }
+                    }, 20);
                 }
             }
         }

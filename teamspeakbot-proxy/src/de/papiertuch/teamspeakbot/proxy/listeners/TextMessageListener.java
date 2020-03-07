@@ -42,7 +42,7 @@ public class TextMessageListener {
                                             TeamSpeakBot.getInstance().getVerifyHandler().create(player.getUniqueId(), event.getInvokerUniqueId());
                                             TeamSpeakBot.getInstance().getTs3ApiAsync().sendPrivateMessage(clientInfo.getId(), TeamSpeakBot.getInstance().getConfigHandler().getString("message.teamSpeak.request").replace("%client%", name));
                                             player.sendMessage(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.request").replace("%client%", clientInfo.getNickname()));
-                                            TextMessageListener.this.sendRequest(player);
+                                            sendRequest(player);
                                         } else {
                                             TeamSpeakBot.getInstance().getTs3ApiAsync().sendPrivateMessage(clientInfo.getId(), TeamSpeakBot.getInstance().getConfigHandler().getString("message.teamSpeak.alreadyVerify"));
                                         }
@@ -66,7 +66,7 @@ public class TextMessageListener {
         });
     }
 
-    private void sendRequest(final ProxiedPlayer player) {
+    private void sendRequest(ProxiedPlayer player) {
         TextComponent accept = new TextComponent(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.hoverAccept"));
         accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.hoverAccept")).create()));
         accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/verify accept"));

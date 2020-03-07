@@ -81,7 +81,7 @@ public class ConfigHandler {
         configuration.addDefault("message.teamSpeak.notOnline", "The player is not online");
         configuration.addDefault("message.teamSpeak.load", "You are verified now");
         configuration.addDefault("message.teamSpeak.supportNotify", "%clients% waits on %channel% ");
-        configuration.addDefault("message.teamSpeak.supportJoin", "There are %amount% team member online");
+        configuration.addDefault("message.teamSpeak.supportJoin", "A team member was notified");
         configuration.addDefault("message.teamSpeak.kickReason", "You were kicked because of the usage of VPN from the server");
         configuration.addDefault("message.teamSpeak.info", "You are not verified! To verify write me !verify <name>");
         configuration.addDefault("message.teamSpeak.request", "A request has been sent to Ingame to client %client%");
@@ -92,7 +92,7 @@ public class ConfigHandler {
         configuration.addDefault("message.inGame.hoverAccept", "&a&lAccept");
         configuration.addDefault("message.inGame.notVerify", "%prefix% &cYou are not verified");
         configuration.addDefault("message.inGame.synchronize", "%prefix% &7Account is being syncedt...");
-        configuration.addDefault("message.inGame.load", "%prefix% &7DYour account have been &a&lloaded");
+        configuration.addDefault("message.inGame.load", "%prefix% &7Your account have been &a&lloaded");
         configuration.addDefault("message.inGame.notOnline", "%prefix% &cYou are not online...");
         configuration.addDefault("message.inGame.message", "%prefix% &7To verify yourself you must write to me on &6&lTeamSpeak");
         configuration.addDefault("message.inGame.noRequest", "%prefix% &cYou do not have any requests");
@@ -100,7 +100,7 @@ public class ConfigHandler {
         configuration.addDefault("message.inGame.deny", "%prefix% &cYou have deny the request");
         configuration.addDefault("message.inGame.request", "%prefix% &6&l%client% &7wants to connect with you");
         configuration.addDefault("message.inGame.delete", "%prefix% &7You have &c&ldeleted &7your account");
-        configuration.addDefault("message.inGame.requestTest", "%prefix% &7Accept with » ");
+        configuration.addDefault("message.inGame.requestTest", "%prefix% &7Accept with &8» ");
         configuration.addDefault("message.inGame.syntax", "%prefix% &7Use&8: /&bverify update&8/&baccept&8/&bdeny&8/&bdelete");
 
         try {
@@ -151,6 +151,10 @@ public class ConfigHandler {
             cacheBoolean.put(string, configuration.getBoolean(string));
         }
         return cacheBoolean.get(string);
+    }
+
+    public FileConfiguration getConfiguration() {
+        return configuration;
     }
 
     public String getString(String string) {

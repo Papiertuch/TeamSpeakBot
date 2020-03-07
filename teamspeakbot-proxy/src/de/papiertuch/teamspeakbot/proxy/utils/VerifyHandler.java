@@ -40,24 +40,21 @@ public class VerifyHandler {
     }
 
     public void delete(UUID uuid) {
-        try {
-            TeamSpeakBot.getInstance().getMySQL().update("DELETE FROM teamSpeak WHERE UUID= '" + uuid.toString() + "'");
-            ClientInfo clientInfo = TeamSpeakBot.getInstance().getTs3ApiAsync().getClientByUId(getTeamSpeakId(uuid)).getUninterruptibly();
-            if (clientInfo != null) {
-                for (int i = 0; i < clientInfo.getServerGroups().length; ++i) {
-                    if (TeamSpeakBot.getInstance().getConfigHandler().getRankIdList().contains(String.valueOf(clientInfo.getServerGroups()[i]))) {
-                        TeamSpeakBot.getInstance().getTs3ApiAsync().removeClientFromServerGroup(clientInfo.getServerGroups()[i], clientInfo.getDatabaseId());
-                    }
-                }
-                TeamSpeakBot.getInstance().getTs3ApiAsync().removeClientFromServerGroup(TeamSpeakBot.getInstance().getConfigHandler().getInt("module.verify.rank"), clientInfo.getDatabaseId());
-                TeamSpeakBot.getInstance().getTs3ApiAsync().editClient(clientInfo.getId(), Collections.singletonMap(ClientProperty.CLIENT_DESCRIPTION, "Unknown"));
-                if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.heads.enable")) {
-                    TeamSpeakBot.getInstance().getTs3ApiAsync().deleteIcon(clientInfo.getIconId());
-                    TeamSpeakBot.getInstance().getTs3ApiAsync().deleteClientPermission(clientInfo.getDatabaseId(), "i_icon_id");
+        String id = getTeamSpeakId(uuid);
+        TeamSpeakBot.getInstance().getMySQL().update("DELETE FROM `teamSpeak` WHERE `uuid`= '" + uuid.toString() + "'");
+        if (TeamSpeakBot.getInstance().getTs3ApiAsync().isClientOnline(id).getUninterruptibly()) {
+            ClientInfo clientInfo = TeamSpeakBot.getInstance().getTs3ApiAsync().getClientByUId(id).getUninterruptibly();
+            for (int i = 0; i < clientInfo.getServerGroups().length; ++i) {
+                if (TeamSpeakBot.getInstance().getConfigHandler().getRankIdList().contains(String.valueOf(clientInfo.getServerGroups()[i]))) {
+                    TeamSpeakBot.getInstance().getTs3ApiAsync().removeClientFromServerGroup(clientInfo.getServerGroups()[i], clientInfo.getDatabaseId());
                 }
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            TeamSpeakBot.getInstance().getTs3ApiAsync().removeClientFromServerGroup(TeamSpeakBot.getInstance().getConfigHandler().getInt("module.verify.rank"), clientInfo.getDatabaseId());
+            TeamSpeakBot.getInstance().getTs3ApiAsync().editClient(clientInfo.getId(), Collections.singletonMap(ClientProperty.CLIENT_DESCRIPTION, "Unknown"));
+            if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.heads.enable")) {
+                TeamSpeakBot.getInstance().getTs3ApiAsync().deleteIcon(clientInfo.getIconId());
+                TeamSpeakBot.getInstance().getTs3ApiAsync().deleteClientPermission(clientInfo.getDatabaseId(), "i_icon_id");
+            }
         }
     }
 
@@ -96,29 +93,47 @@ public class VerifyHandler {
         }
     }
 
-    public String getRank(UUID uuid) {
+
+    public int getNewRank(String uuid) {
         try {
-            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `UUID` = ?");
-            preparedStatement.setString(1, uuid.toString());
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `id` = ?");
+            preparedStatement.setString(1, uuid);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getString("RANK");
+                return resultSet.getInt("newRank");
             }
             resultSet.close();
             preparedStatement.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return 0;
+    }
+
+
+    public int getRank(UUID uuid) {
+        try {
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `uuid` = ?");
+            preparedStatement.setString(1, uuid.toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("rank");
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public String getTeamSpeakId(UUID uuid) {
         try {
-            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `UUID` = ?");
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `uuid` = ?");
             preparedStatement.setString(1, uuid.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getString("ID");
+                return resultSet.getString("id");
             }
             resultSet.close();
             preparedStatement.close();
@@ -160,9 +175,45 @@ public class VerifyHandler {
         return iconId;
     }
 
+    public void setNewRank(String uuid, int rank) {
+        try {
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("UPDATE `teamSpeak` SET `newRank` = ? WHERE `id` = ?");
+            preparedStatement.setString(2, uuid);
+            preparedStatement.setInt(1, rank);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setNewRank(UUID uuid, int rank) {
+        try {
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("UPDATE `teamSpeak` SET `newRank` = ? WHERE `uuid` = ?");
+            preparedStatement.setString(2, uuid.toString());
+            preparedStatement.setInt(1, rank);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setRank(String uuid, int rank) {
+        try {
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("UPDATE `teamSpeak` SET `rank` = ? WHERE `id` = ?");
+            preparedStatement.setString(2, uuid);
+            preparedStatement.setInt(1, rank);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setRank(UUID uuid, int rank) {
         try {
-            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("UPDATE `teamSpeak` SET `RANK` = ? WHERE `UUID` = ?");
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("UPDATE `teamSpeak` SET `rank` = ? WHERE `uuid` = ?");
             preparedStatement.setString(2, uuid.toString());
             preparedStatement.setInt(1, rank);
             preparedStatement.executeUpdate();
@@ -174,7 +225,7 @@ public class VerifyHandler {
 
     public void setVerify(UUID uuid, boolean bool) {
         try {
-            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("UPDATE `teamSpeak` SET `STATUS` = ? WHERE `UUID` = ?");
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("UPDATE `teamSpeak` SET `status` = ? WHERE `uuid` = ?");
             preparedStatement.setString(2, uuid.toString());
             preparedStatement.setBoolean(1, bool);
             preparedStatement.executeUpdate();
@@ -186,11 +237,12 @@ public class VerifyHandler {
 
     public void create(UUID uuid, String id) {
         try {
-            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("INSERT INTO `teamSpeak` (`UUID`, `ID`, `RANK`, `STATUS`) VALUES (?, ?, ?, ?)");
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("INSERT INTO `teamSpeak` (`uuid`, `id`, `rank`, `newRank`, `status`) VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, uuid.toString());
             preparedStatement.setString(2, id);
             preparedStatement.setInt(3, 0);
-            preparedStatement.setBoolean(4, false);
+            preparedStatement.setInt(4, 0);
+            preparedStatement.setBoolean(5, false);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (Exception e) {
@@ -200,11 +252,11 @@ public class VerifyHandler {
 
     public boolean isVerify(UUID uuid) {
         try {
-            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `UUID` = ?");
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `uuid` = ?");
             preparedStatement.setString(1, uuid.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getBoolean("STATUS");
+                return resultSet.getBoolean("status");
             }
             resultSet.close();
             preparedStatement.close();
@@ -216,11 +268,11 @@ public class VerifyHandler {
 
     public boolean isVerify(String uuid) {
         try {
-            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `ID` = ?");
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `id` = ?");
             preparedStatement.setString(1, uuid);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getBoolean("STATUS");
+                return resultSet.getBoolean("status");
             }
             resultSet.close();
             preparedStatement.close();
@@ -232,11 +284,11 @@ public class VerifyHandler {
 
     public boolean isExists(String uuid) {
         try {
-            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `ID` = ?");
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `id` = ?");
             preparedStatement.setString(1, uuid);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getString("ID") != null;
+                return resultSet.getString("id") != null;
             }
             resultSet.close();
             preparedStatement.close();
@@ -248,11 +300,11 @@ public class VerifyHandler {
 
     public boolean isExists(UUID uuid) {
         try {
-            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `UUID` = ?");
+            PreparedStatement preparedStatement = TeamSpeakBot.getInstance().getMySQL().getConnection().prepareStatement("SELECT * FROM `teamSpeak` WHERE `uuid` = ?");
             preparedStatement.setString(1, uuid.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getString("UUID") != null;
+                return resultSet.getString("uuid") != null;
             }
             resultSet.close();
             preparedStatement.close();

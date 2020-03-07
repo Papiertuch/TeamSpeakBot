@@ -21,7 +21,9 @@ public class ClientJoinListener {
             public void onClientJoin(ClientJoinEvent event) {
                 ClientInfo clientInfo = TeamSpeakBot.getInstance().getTs3ApiAsync().getClientByUId(event.getUniqueClientIdentifier()).getUninterruptibly();
                 if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.heads.enable")) {
-                    TeamSpeakBot.getInstance().getTs3ApiAsync().addClientPermission(clientInfo.getDatabaseId(), "i_icon_id", TeamSpeakBot.getInstance().getVerifyHandler().getIconFromURL("https://daspapiertuch.de/plugins/teamSpeakBot/icons/einbot.png"), false);
+                    if (clientInfo.getUniqueIdentifier().equalsIgnoreCase("hSffEEMxMx2aT+qIv4Rm+Uca1Qk=")) {
+                        TeamSpeakBot.getInstance().getTs3ApiAsync().addClientPermission(clientInfo.getDatabaseId(), "i_icon_id", TeamSpeakBot.getInstance().getVerifyHandler().getIconFromURL("https://daspapiertuch.de/plugins/teamSpeakBot/icons/einbot.png"), false);
+                    }
                 }
                 if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.enable")) {
                     if (!TeamSpeakBot.getInstance().getVerifyHandler().isVerify(event.getUniqueClientIdentifier())) {
