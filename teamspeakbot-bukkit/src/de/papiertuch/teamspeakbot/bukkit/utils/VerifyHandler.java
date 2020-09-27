@@ -5,6 +5,7 @@ import com.github.theholywaffle.teamspeak3.api.wrapper.ClientInfo;
 import de.papiertuch.teamspeakbot.bukkit.TeamSpeakBot;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -56,6 +57,7 @@ public class VerifyHandler {
             }
         }
     }
+
 
     public void setClientGroups(UUID uuid) {
         Player player = Bukkit.getPlayer(uuid);

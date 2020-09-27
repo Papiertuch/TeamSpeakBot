@@ -66,11 +66,11 @@ public class TextMessageListener {
     private void sendRequest(Player player) {
         TextComponent accept = new TextComponent(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.hoverAccept"));
         accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.hoverAccept")).create()));
-        accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/verify accept"));
+        accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + TeamSpeakBot.getInstance().getConfigHandler().getString("module.verify.command") + " accept"));
 
         TextComponent deny = new TextComponent(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.hoverDeny"));
         deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.hoverDeny")).create()));
-        deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/verify deny"));
+        deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + TeamSpeakBot.getInstance().getConfigHandler().getString("module.verify.command") + " deny"));
 
         TextComponent txt = new TextComponent(" §8┃§r ");
         TextComponent msg = new TextComponent(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.requestTest"));

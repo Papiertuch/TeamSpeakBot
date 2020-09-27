@@ -17,7 +17,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Leon on 29.02.2020.
@@ -35,6 +41,7 @@ public class TeamSpeakBot extends Plugin {
     private TS3ApiAsync ts3ApiAsync;
     private ConfigHandler configHandler;
     private HashMap<String, Boolean> cacheAddress;
+    private String newVersion;
 
     @Override
     public void onEnable() {
@@ -61,7 +68,24 @@ public class TeamSpeakBot extends Plugin {
         ts3ApiAsync = ts3Query.getAsyncApi();
         configHandler.loadConfig();
 
-        ProxyServer.getInstance().getPluginManager().registerListener(this, new LoginListener());
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL("https://daspapiertuch.de/check/teamSpeakBot.php").openConnection();
+            connection.setRequestProperty("User-Agent", this.getDescription().getVersion());
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            newVersion = bufferedReader.readLine();
+            if (newVersion.equalsIgnoreCase("false")) {
+                sendMessage("§cYou have a version that's been deactivated");
+                sendMessage("§cPlease download the latest version");
+                sendMessage("§bDiscord https://daspapiertuch.de/discord/ or Papiertuch#7836");
+                sendMessage("§ehttps://www.spigotmc.org/resources/einbot-teamspeak-verification-and-support-notify.48188/");
+                this.onDisable();
+            } else if (!newVersion.equalsIgnoreCase(getDescription().getVersion())) {
+                sendMessage("§aA new version is available §8» §f§l" + newVersion);
+                sendMessage("§ehttps://www.spigotmc.org/resources/einbot-teamspeak-verification-and-support-notify.48188/");
+            }
+        } catch (IOException e) {
+            sendMessage("§cNo connection to the WebServer could be established, you will not receive update notifications");
+        }
 
         if (configHandler.getBoolean("module.verify.enable")) {
             mySQL.createTable();
@@ -75,7 +99,6 @@ public class TeamSpeakBot extends Plugin {
             ts3ApiAsync.login(configHandler.getString("query.user"), configHandler.getString("query.password"));
             ts3ApiAsync.selectVirtualServerByPort(configHandler.getInt("teamSpeak.port"));
             ts3ApiAsync.setNickname(configHandler.getString("teamSpeak.botName"));
-
             if (configHandler.getBoolean("module.verify.enable")) {
                 new TextMessageListener().register();
                 register();
@@ -85,6 +108,7 @@ public class TeamSpeakBot extends Plugin {
             }
             new ClientJoinListener().register();
         } catch (Exception e) {
+            e.printStackTrace();
             sendMessage("§cThe connection to the TeamSpeak server failed...");
             return;
         }
@@ -94,6 +118,31 @@ public class TeamSpeakBot extends Plugin {
             sendMessage("§cThe connection to the TeamSpeak server failed...");
             return;
         }
+        getProxy().getScheduler().schedule(this, () -> {
+            System.out.println(ts3Query.isConnected());
+            if (!ts3Query.isConnected()) {
+                try {
+                    ts3Config = new TS3Config();
+                    ts3Query = new TS3Query(ts3Config);
+                    ts3ApiAsync = ts3Query.getAsyncApi();
+                    ts3Config.setHost(configHandler.getString("query.host"));
+                    ts3Config.setQueryPort(configHandler.getInt("query.port"));
+                    ts3Config.setFloodRate(TS3Query.FloodRate.UNLIMITED);
+                    ts3Config.setReconnectStrategy(ReconnectStrategy.exponentialBackoff());
+                    ts3Query.connect();
+                    ts3ApiAsync.login(configHandler.getString("query.user"), configHandler.getString("query.password"));
+                    ts3ApiAsync.selectVirtualServerByPort(configHandler.getInt("teamSpeak.port"));
+                    ts3ApiAsync.setNickname(configHandler.getString("teamSpeak.botName"));
+                } catch (Exception e) {
+                    sendMessage("§cA new attempt to connect to TeamSpeak has failed");
+                }
+            }
+            ts3ApiAsync.getClients().onSuccess(clients -> clients.forEach(client -> {
+                if (hasVPN(client.getIp())) {
+                    TeamSpeakBot.getInstance().getTs3ApiAsync().kickClientFromServer(TeamSpeakBot.getInstance().getConfigHandler().getString("message.teamSpeak.kickReason"), client.getId());
+                }
+            }));
+        }, 1, 1, TimeUnit.MINUTES);
     }
 
     private void register() {
@@ -102,6 +151,7 @@ public class TeamSpeakBot extends Plugin {
         pluginManager.registerListener(this, new PostLoginListener());
     }
 
+    @Override
     public void onDisable() {
         if (ts3Query.isConnected()) {
             ts3ApiAsync.logout();
@@ -142,6 +192,10 @@ public class TeamSpeakBot extends Plugin {
 
     public void sendMessage(String message) {
         ProxyServer.getInstance().getConsole().sendMessage("[TeamSpeakBot] " + message);
+    }
+
+    public String getNewVersion() {
+        return newVersion;
     }
 
     public static TeamSpeakBot getInstance() {

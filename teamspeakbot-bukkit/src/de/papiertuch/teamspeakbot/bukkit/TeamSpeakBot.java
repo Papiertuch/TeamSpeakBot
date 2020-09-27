@@ -3,7 +3,6 @@ package de.papiertuch.teamspeakbot.bukkit;
 import com.github.theholywaffle.teamspeak3.TS3ApiAsync;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
-import com.github.theholywaffle.teamspeak3.api.reconnect.ReconnectStrategy;
 import de.papiertuch.teamspeakbot.bukkit.commands.VerifyCommand;
 import de.papiertuch.teamspeakbot.bukkit.listeners.ClientJoinListener;
 import de.papiertuch.teamspeakbot.bukkit.listeners.ClientMovedListener;
@@ -15,9 +14,17 @@ import de.papiertuch.teamspeakbot.bukkit.utils.VerifyHandler;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 
 /**
@@ -36,6 +43,7 @@ public class TeamSpeakBot extends JavaPlugin {
     private TS3ApiAsync ts3ApiAsync;
     private ConfigHandler configHandler;
     private HashMap<String, Boolean> cacheAddress;
+    private String newVersion;
 
     @Override
     public void onEnable() {
@@ -53,6 +61,26 @@ public class TeamSpeakBot extends JavaPlugin {
         System.out.print("> Version: " + getDescription().getVersion());
         System.out.print("> Java: " + System.getProperty("java.version") + " System: " + System.getProperty("os.name"));
         System.out.print("   ");
+
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL("https://daspapiertuch.de/check/teamSpeakBot.php").openConnection();
+            connection.setRequestProperty("User-Agent", this.getDescription().getVersion());
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            newVersion = bufferedReader.readLine();
+            if (newVersion.equalsIgnoreCase("false")) {
+                sendMessage("§cYou have a version that's been deactivated");
+                sendMessage("§cPlease download the latest version");
+                sendMessage("§bDiscord https://daspapiertuch.de/discord/ or Papiertuch#7836");
+                sendMessage("§ehttps://www.spigotmc.org/resources/einbot-teamspeak-verification-and-support-notify.48188/");
+                this.onDisable();
+            } else if (!newVersion.equalsIgnoreCase(getDescription().getVersion())) {
+                sendMessage("§aThere is a new version available §8» §f§l" + newVersion);
+                sendMessage("§ehttps://www.spigotmc.org/resources/einbot-teamspeak-verification-and-support-notify.48188/");
+            }
+        } catch (IOException e) {
+            sendMessage("§cNo connection to the WebServer could be established, you will not receive update notifications");
+        }
+
         verifyHandler = new VerifyHandler();
         configHandler = new ConfigHandler();
         mySQL = new MySQL();
@@ -67,7 +95,6 @@ public class TeamSpeakBot extends JavaPlugin {
         ts3Config.setHost(configHandler.getString("query.host"));
         ts3Config.setQueryPort(configHandler.getInt("query.port"));
         ts3Config.setFloodRate(TS3Query.FloodRate.UNLIMITED);
-        ts3Config.setReconnectStrategy(ReconnectStrategy.exponentialBackoff());
         try {
             ts3Query.connect();
             ts3ApiAsync.login(configHandler.getString("query.user"), configHandler.getString("query.password"));
@@ -98,7 +125,28 @@ public class TeamSpeakBot extends JavaPlugin {
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new PlayerLoginListener(), this);
 
-        getCommand("verify").setExecutor(new VerifyCommand());
+
+        try {
+            Class<?> clazz = reflectCraftClazz(".CraftServer");
+            CommandMap commandMap = (CommandMap) clazz.getMethod("getCommandMap").invoke(Bukkit.getServer());
+            commandMap.register(TeamSpeakBot.getInstance().getConfigHandler().getString("module.verify.command"), new VerifyCommand());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private  Class<?> reflectCraftClazz(String suffix) {
+        try {
+            String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+            return Class.forName("org.bukkit.craftbukkit." + version + suffix);
+        } catch (Exception var4) {
+            try {
+                return Class.forName("org.bukkit.craftbukkit." + suffix);
+            } catch (ClassNotFoundException var3) {
+                return null;
+            }
+        }
     }
 
     public void onDisable() {
@@ -139,8 +187,12 @@ public class TeamSpeakBot extends JavaPlugin {
         return false;
     }
 
+    public String getNewVersion() {
+        return newVersion;
+    }
+
     public void sendMessage(String message) {
-       getServer().getConsoleSender().sendMessage("[TeamSpeakBot] " + message);
+        getServer().getConsoleSender().sendMessage("[TeamSpeakBot] " + message);
     }
 
     public static TeamSpeakBot getInstance() {

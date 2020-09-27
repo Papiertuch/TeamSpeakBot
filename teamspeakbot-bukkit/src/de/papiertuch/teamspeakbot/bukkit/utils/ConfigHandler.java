@@ -48,6 +48,7 @@ public class ConfigHandler {
         configuration.addDefault("teamSpeak.port", 9987);
         configuration.addDefault("teamSpeak.botName", "TeamSpeakBot");
         configuration.addDefault("module.verify.enable", true);
+        configuration.addDefault("module.verify.command", "verify");
         configuration.addDefault("module.verify.heads.enable", true);
         configuration.addDefault("module.verify.rank", 1);
 
@@ -151,6 +152,10 @@ public class ConfigHandler {
             cacheBoolean.put(string, configuration.getBoolean(string));
         }
         return cacheBoolean.get(string);
+    }
+
+    public String getPrefix() {
+        return prefix;
     }
 
     public FileConfiguration getConfiguration() {

@@ -24,9 +24,13 @@ public class PlayerJoinListener implements Listener {
             @Override
             public void run() {
                 if (NameTags.getInstance().getMySQL().isVerify(player.getUniqueId())) {
-                    PlayerJoinListener.this.setNameTag(player, NameTags.getInstance().getVerifyTag());
+                    if (NameTags.getInstance().getConfiguration().getBoolean("nameTag.verify.enable")) {
+                        setNameTag(player, NameTags.getInstance().getVerifyTag());
+                    }
                 } else {
-                    PlayerJoinListener.this.setNameTag(player, NameTags.getInstance().getUnVerifyTag());
+                    if (NameTags.getInstance().getConfiguration().getBoolean("nameTag.verify.enable")) {
+                        setNameTag(player, NameTags.getInstance().getUnVerifyTag());
+                    }
                 }
             }
         }, 5L);

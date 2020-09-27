@@ -20,6 +20,9 @@ public class ClientMovedListener {
         TeamSpeakBot.getInstance().getTs3ApiAsync().addTS3Listeners(new TS3EventAdapter() {
             @Override
             public void onClientMoved(ClientMovedEvent event) {
+                if (TeamSpeakBot.getInstance().getMySQL().getConnection() == null) {
+                    return;
+                }
                 if (TeamSpeakBot.getInstance().getConfigHandler().getSupportChannelList().contains(String.valueOf(event.getTargetChannelId()))) {
                     String name = TeamSpeakBot.getInstance().getTs3ApiAsync().getClientInfo(event.getClientId()).getUninterruptibly().getNickname();
                     String channel = TeamSpeakBot.getInstance().getTs3ApiAsync().getChannelInfo(event.getTargetChannelId()).getUninterruptibly().getName();

@@ -61,6 +61,10 @@ public class NameTags extends JavaPlugin {
         }
     }
 
+    public FileConfiguration getConfiguration() {
+        return configuration;
+    }
+
     public String getVerifyTag() {
         return verifyTag;
     }

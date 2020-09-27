@@ -25,12 +25,7 @@ public class MySQL {
         } catch (Exception e) {
             TeamSpeakBot.getInstance().sendMessage("§cThe connection to the MySQL server failed...");
         }
-        ProxyServer.getInstance().getScheduler().schedule(TeamSpeakBot.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                update("CREATE TABLE IF NOT EXISTS `teamSpeak` (`uuid` varchar(64), `id` varchar(64), `rank` int, `newRank` int, `status` bool);");
-            }
-        }, 3, 1, TimeUnit.HOURS);
+        ProxyServer.getInstance().getScheduler().schedule(TeamSpeakBot.getInstance(), () -> update("CREATE TABLE IF NOT EXISTS `teamSpeak` (`uuid` varchar(64), `id` varchar(64), `rank` int, `newRank` int, `status` bool);"), 3, 1, TimeUnit.HOURS);
     }
 
     public void createTable() {
