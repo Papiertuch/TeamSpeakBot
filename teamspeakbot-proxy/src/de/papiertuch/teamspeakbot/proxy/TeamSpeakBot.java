@@ -4,6 +4,7 @@ import com.github.theholywaffle.teamspeak3.TS3ApiAsync;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ReconnectStrategy;
+import de.papiertuch.teamspeakbot.proxy.api.EinBotApi;
 import de.papiertuch.teamspeakbot.proxy.commands.VerifyCommand;
 import de.papiertuch.teamspeakbot.proxy.listeners.*;
 import de.papiertuch.teamspeakbot.proxy.utils.ConfigHandler;
@@ -39,6 +40,7 @@ public class TeamSpeakBot extends Plugin {
     private TS3Config ts3Config;
     private TS3Query ts3Query;
     private TS3ApiAsync ts3ApiAsync;
+    private EinBotApi einBotApi;
     private ConfigHandler configHandler;
     private HashMap<String, Boolean> cacheAddress;
     private String newVersion;
@@ -61,6 +63,7 @@ public class TeamSpeakBot extends Plugin {
         System.out.print("   ");
         verifyHandler = new VerifyHandler();
         configHandler = new ConfigHandler();
+        einBotApi = new EinBotApi();
         mySQL = new MySQL();
         ts3Config = new TS3Config();
         ts3Query = new TS3Query(ts3Config);
@@ -119,7 +122,6 @@ public class TeamSpeakBot extends Plugin {
             return;
         }
         getProxy().getScheduler().schedule(this, () -> {
-            System.out.println(ts3Query.isConnected());
             if (!ts3Query.isConnected()) {
                 try {
                     ts3Config = new TS3Config();
@@ -192,6 +194,10 @@ public class TeamSpeakBot extends Plugin {
 
     public void sendMessage(String message) {
         ProxyServer.getInstance().getConsole().sendMessage("[TeamSpeakBot] " + message);
+    }
+
+    public EinBotApi getEinBotApi() {
+        return einBotApi;
     }
 
     public String getNewVersion() {

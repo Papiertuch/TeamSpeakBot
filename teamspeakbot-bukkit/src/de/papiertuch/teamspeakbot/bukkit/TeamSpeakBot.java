@@ -3,6 +3,7 @@ package de.papiertuch.teamspeakbot.bukkit;
 import com.github.theholywaffle.teamspeak3.TS3ApiAsync;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
+import de.papiertuch.teamspeakbot.bukkit.api.EinBotApi;
 import de.papiertuch.teamspeakbot.bukkit.commands.VerifyCommand;
 import de.papiertuch.teamspeakbot.bukkit.listeners.ClientJoinListener;
 import de.papiertuch.teamspeakbot.bukkit.listeners.ClientMovedListener;
@@ -41,6 +42,7 @@ public class TeamSpeakBot extends JavaPlugin {
     private TS3Config ts3Config;
     private TS3Query ts3Query;
     private TS3ApiAsync ts3ApiAsync;
+    private EinBotApi einBotApi;
     private ConfigHandler configHandler;
     private HashMap<String, Boolean> cacheAddress;
     private String newVersion;
@@ -82,6 +84,7 @@ public class TeamSpeakBot extends JavaPlugin {
         }
 
         verifyHandler = new VerifyHandler();
+        einBotApi = new EinBotApi();
         configHandler = new ConfigHandler();
         mySQL = new MySQL();
         ts3Config = new TS3Config();
@@ -217,6 +220,10 @@ public class TeamSpeakBot extends JavaPlugin {
 
     public TS3Query getTs3Query() {
         return ts3Query;
+    }
+
+    public EinBotApi getEinBotApi() {
+        return einBotApi;
     }
 
     public VerifyHandler getVerifyHandler() {
