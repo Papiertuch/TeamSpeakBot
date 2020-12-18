@@ -22,7 +22,7 @@ public class VerifyCommand extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] args) {
-        Player player = (Player)commandSender;
+        Player player = (Player) commandSender;
         if (args.length == 0) {
             if (!TeamSpeakBot.getInstance().getVerifyHandler().isVerify(player.getUniqueId())) {
                 TeamSpeakBot.getInstance().getTs3ApiAsync().getClients().onSuccess(clients -> clients.forEach(client -> {
@@ -34,8 +34,7 @@ public class VerifyCommand extends BukkitCommand {
             } else {
                 player.sendMessage(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.syntax"));
             }
-        }
-        else if (args.length == 1) {
+        } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("accept")) {
                 if (TeamSpeakBot.getInstance().getVerifyHandler().getRequest().containsKey(player.getUniqueId())) {
                     VerifyHandler verifyHandler = TeamSpeakBot.getInstance().getVerifyHandler();

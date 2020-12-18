@@ -17,17 +17,21 @@ public class PlayerLoginListener implements Listener {
 
     @EventHandler
     public void onPlayerLogin(PlayerLoginEvent event) {
+        Player player = event.getPlayer();
         if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.enable")) {
             if (TeamSpeakBot.getInstance().getMySQL().getConnection() == null) {
-                event.disallow(PlayerLoginEvent.Result.KICK_OTHER, TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.prefix") + " §cThere is no mysql connection. Please check your mysql data");
-                return;
+                if (player.hasPermission("update.notify")) {
+                    event.getPlayer().sendMessage(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.prefix") + " §cThere is no mysql connection. Please check your mysql data");
+                    return;
+                }
             }
         }
         if (!TeamSpeakBot.getInstance().getTs3Query().isConnected()) {
-            event.disallow(PlayerLoginEvent.Result.KICK_OTHER, TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.prefix") + " §cThere is no connection the teamSpeak Server. Please check your query data");
-            return;
+            if (player.hasPermission("update.notify")) {
+                event.getPlayer().sendMessage(TeamSpeakBot.getInstance().getConfigHandler().getString("message.inGame.prefix") + " §cThere is no connection the teamSpeak Server. Please check your query data");
+                return;
+            }
         }
-        Player player = event.getPlayer();
         if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.vpn.enable")) {
             if (Bukkit.getPluginManager().getPlugin("BanSystem-Bukkit") == null) {
                 if (TeamSpeakBot.getInstance().hasVPN(event.getAddress().getHostAddress())) {

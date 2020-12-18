@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="Jars">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../Jars/json-20180813.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jars/okhttp-3.10.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jars/okio-1.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jars/teamspeak3-api-1.2.0-with-dependencies.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jars/spigot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jars/BungeeCord.jar!/" />
+      <root url="file://$PROJECT_DIR$/../Jars" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../Jars/spigot.jar!/" />
+      <root url="file://$PROJECT_DIR$/../Jars" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../Jars" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../Jars" recursive="false" type="SOURCES" />
+  </library>
+</component>

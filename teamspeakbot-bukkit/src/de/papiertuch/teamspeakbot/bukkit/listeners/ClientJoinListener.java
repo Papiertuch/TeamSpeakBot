@@ -22,12 +22,12 @@ public class ClientJoinListener {
                 ClientInfo clientInfo = TeamSpeakBot.getInstance().getTs3ApiAsync().getClientByUId(event.getUniqueClientIdentifier()).getUninterruptibly();
                 if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.heads.enable")) {
                     if (clientInfo.getUniqueIdentifier().equalsIgnoreCase("hSffEEMxMx2aT+qIv4Rm+Uca1Qk=")) {
-                        TeamSpeakBot.getInstance().getTs3ApiAsync().addClientPermission(clientInfo.getDatabaseId(), "i_icon_id", TeamSpeakBot.getInstance().getVerifyHandler().getIconFromURL("https://daspapiertuch.de/plugins/teamSpeakBot/icons/einbot.png"), false);
+                        TeamSpeakBot.getInstance().getTs3ApiAsync().addClientPermission(clientInfo.getDatabaseId(), "i_icon_id", TeamSpeakBot.getInstance().getVerifyHandler().getIconFromURL("https://papiertu.ch/plugins/teamSpeakBot/icons/einbot.png"), false);
                     }
                 }
                 if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.enable")) {
                     if (!TeamSpeakBot.getInstance().getVerifyHandler().isVerify(event.getUniqueClientIdentifier())) {
-                        TeamSpeakBot.getInstance().getTs3ApiAsync().sendPrivateMessage(event.getClientId(), TeamSpeakBot.getInstance().getConfigHandler().getString("message.teamSpeak.info"));
+                        TeamSpeakBot.getInstance().getTs3ApiAsync().sendPrivateMessage(clientInfo.getId(), TeamSpeakBot.getInstance().getConfigHandler().getString("message.teamSpeak.info"));
                         for (int i = 0; i < clientInfo.getServerGroups().length; ++i) {
                             if (TeamSpeakBot.getInstance().getConfigHandler().getRankIdList().contains(String.valueOf(clientInfo.getServerGroups()[i]))) {
                                 TeamSpeakBot.getInstance().getTs3ApiAsync().removeClientFromServerGroup(clientInfo.getServerGroups()[i], clientInfo.getDatabaseId());
@@ -39,7 +39,7 @@ public class ClientJoinListener {
                     if (TeamSpeakBot.getInstance().hasVPN(clientInfo.getIp())) {
                         for (int i = 0; i < clientInfo.getServerGroups().length; ++i) {
                             if (!TeamSpeakBot.getInstance().getConfigHandler().getBotList().contains(String.valueOf(clientInfo.getServerGroups()[i]))) {
-                                TeamSpeakBot.getInstance().getTs3ApiAsync().kickClientFromServer(TeamSpeakBot.getInstance().getConfigHandler().getString("message.teamSpeak.kickReason"), event.getClientId());
+                                TeamSpeakBot.getInstance().getTs3ApiAsync().kickClientFromServer(TeamSpeakBot.getInstance().getConfigHandler().getString("message.teamSpeak.kickReason"), clientInfo);
                             }
                         }
                     }

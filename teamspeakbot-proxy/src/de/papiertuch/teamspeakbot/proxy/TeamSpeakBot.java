@@ -57,7 +57,7 @@ public class TeamSpeakBot extends Plugin {
         System.out.print("                                 | |                                    ");
         System.out.print("                                 |_|                                    ");
         System.out.print("                               ");
-        System.out.print("> TeamSpeakBot-Proxy - by Papiertuch | Discord: https://discord.gg/4T9jV9d");
+        System.out.print("> TeamSpeakBot-Proxy - by Papiertuch | Discord: https://papiertu.ch/go/discord/");
         System.out.print("> Version: " + getDescription().getVersion());
         System.out.print("> Java: " + System.getProperty("java.version") + " System: " + System.getProperty("os.name"));
         System.out.print("   ");
@@ -72,14 +72,14 @@ public class TeamSpeakBot extends Plugin {
         configHandler.loadConfig();
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL("https://daspapiertuch.de/check/teamSpeakBot.php").openConnection();
+            HttpURLConnection connection = (HttpURLConnection) new URL("https://papiertu.ch/check/teamSpeakBot.php").openConnection();
             connection.setRequestProperty("User-Agent", this.getDescription().getVersion());
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             newVersion = bufferedReader.readLine();
             if (newVersion.equalsIgnoreCase("false")) {
                 sendMessage("§cYou have a version that's been deactivated");
                 sendMessage("§cPlease download the latest version");
-                sendMessage("§bDiscord https://daspapiertuch.de/discord/ or Papiertuch#7836");
+                sendMessage("§bDiscord https://papiertu.ch/go/discord/ or Papiertuch#7836");
                 sendMessage("§ehttps://www.spigotmc.org/resources/einbot-teamspeak-verification-and-support-notify.48188/");
                 this.onDisable();
             } else if (!newVersion.equalsIgnoreCase(getDescription().getVersion())) {
@@ -135,6 +135,14 @@ public class TeamSpeakBot extends Plugin {
                     ts3ApiAsync.login(configHandler.getString("query.user"), configHandler.getString("query.password"));
                     ts3ApiAsync.selectVirtualServerByPort(configHandler.getInt("teamSpeak.port"));
                     ts3ApiAsync.setNickname(configHandler.getString("teamSpeak.botName"));
+                    if (configHandler.getBoolean("module.verify.enable")) {
+                        new TextMessageListener().register();
+                        register();
+                    }
+                    if (configHandler.getBoolean("module.support.enable")) {
+                        new ClientMovedListener().register();
+                    }
+                    new ClientJoinListener().register();
                 } catch (Exception e) {
                     sendMessage("§cA new attempt to connect to TeamSpeak has failed");
                 }

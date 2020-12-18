@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="TeamSpeakBot" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f9cf0087-53fc-4e29-9a37-382803501a09" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/TeamSpeakBot.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/TeamSpeakBot.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Jars.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/teamspeakbot-bukkit.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teamspeakbot-nametags/teamspeakbot-nametags.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teamspeakbot-proxy/teamspeakbot-proxy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/TeamSpeakBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/TeamSpeakBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/commands/VerifyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/commands/VerifyCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/listeners/ClientJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/listeners/ClientJoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/listeners/PlayerLoginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/listeners/PlayerLoginListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-bukkit/src/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/bungee.yml" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/bungee.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/TeamSpeakBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/TeamSpeakBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/ClientJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/ClientJoinListener.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1lppWmKqGmjohuyjW1kUKdtmUzt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Jars/teamspeak3-api-1.2.0-with-dependencies.jar" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f9cf0087-53fc-4e29-9a37-382803501a09" name="Default Changelist" comment="" />
+      <created>1608303921196</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608303921196</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
