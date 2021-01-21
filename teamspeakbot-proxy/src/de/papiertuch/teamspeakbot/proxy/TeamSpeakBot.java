@@ -159,6 +159,7 @@ public class TeamSpeakBot extends Plugin {
         PluginManager pluginManager = getProxy().getPluginManager();
         pluginManager.registerCommand(this, new VerifyCommand());
         pluginManager.registerListener(this, new PostLoginListener());
+        pluginManager.registerListener(this, new PlayerDisconnectListener());
     }
 
     @Override

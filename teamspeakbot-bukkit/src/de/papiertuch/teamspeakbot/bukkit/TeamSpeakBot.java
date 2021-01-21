@@ -6,10 +6,7 @@ import com.github.theholywaffle.teamspeak3.TS3Query;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ReconnectStrategy;
 import de.papiertuch.teamspeakbot.bukkit.api.EinBotApi;
 import de.papiertuch.teamspeakbot.bukkit.commands.VerifyCommand;
-import de.papiertuch.teamspeakbot.bukkit.listeners.ClientJoinListener;
-import de.papiertuch.teamspeakbot.bukkit.listeners.ClientMovedListener;
-import de.papiertuch.teamspeakbot.bukkit.listeners.PlayerLoginListener;
-import de.papiertuch.teamspeakbot.bukkit.listeners.TextMessageListener;
+import de.papiertuch.teamspeakbot.bukkit.listeners.*;
 import de.papiertuch.teamspeakbot.bukkit.utils.ConfigHandler;
 import de.papiertuch.teamspeakbot.bukkit.utils.MySQL;
 import de.papiertuch.teamspeakbot.bukkit.utils.VerifyHandler;
@@ -161,7 +158,7 @@ public class TeamSpeakBot extends JavaPlugin {
     private void register() {
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new PlayerLoginListener(), this);
-
+        pluginManager.registerEvents(new PlayerQuitListener(), this);
 
         try {
             Class<?> clazz = reflectCraftClazz(".CraftServer");
