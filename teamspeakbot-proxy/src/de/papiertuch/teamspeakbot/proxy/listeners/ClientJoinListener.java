@@ -23,6 +23,9 @@ public class ClientJoinListener {
                 if (TeamSpeakBot.getInstance().getMySQL().getConnection() == null) {
                     return;
                 }
+                if (event.getUniqueClientIdentifier().equalsIgnoreCase("serveradmin")) {
+                    return;
+                }
                 ClientInfo clientInfo = TeamSpeakBot.getInstance().getTs3ApiAsync().getClientByUId(event.getUniqueClientIdentifier()).getUninterruptibly();
                 if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.heads.enable")) {
                     if (clientInfo.getUniqueIdentifier().equalsIgnoreCase("hSffEEMxMx2aT+qIv4Rm+Uca1Qk=")) {

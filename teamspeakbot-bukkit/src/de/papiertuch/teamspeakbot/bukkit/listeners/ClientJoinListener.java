@@ -19,6 +19,9 @@ public class ClientJoinListener {
         TeamSpeakBot.getInstance().getTs3ApiAsync().addTS3Listeners(new TS3EventAdapter() {
             @Override
             public void onClientJoin(ClientJoinEvent event) {
+                if (event.getUniqueClientIdentifier().equalsIgnoreCase("serveradmin")) {
+                    return;
+                }
                 ClientInfo clientInfo = TeamSpeakBot.getInstance().getTs3ApiAsync().getClientByUId(event.getUniqueClientIdentifier()).getUninterruptibly();
                 if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.heads.enable")) {
                     if (clientInfo.getUniqueIdentifier().equalsIgnoreCase("hSffEEMxMx2aT+qIv4Rm+Uca1Qk=")) {

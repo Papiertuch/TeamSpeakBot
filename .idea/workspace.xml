@@ -7,7 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9cf0087-53fc-4e29-9a37-382803501a09" name="Default Changelist" comment="push">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/TeamSpeakBot.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/TeamSpeakBot.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/TeamSpeakBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/TeamSpeakBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/listeners/ClientJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/listeners/ClientJoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-bukkit/src/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/bungee.yml" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/bungee.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/TeamSpeakBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/TeamSpeakBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/ClientJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/ClientJoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/PostLoginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/PostLoginListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,9 +36,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Jars/json-20180813.jar" />
     <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="discord-application" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -48,7 +56,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608321840736</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="push">
+      <created>1608481424518</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1608481424519</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

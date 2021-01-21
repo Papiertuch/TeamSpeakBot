@@ -1,22 +1,29 @@
 package de.papiertuch.teamspeakbot.proxy.listeners;
 
 import de.papiertuch.teamspeakbot.proxy.TeamSpeakBot;
+import de.papiertuch.teamspeakbot.proxy.utils.VerifyHandler;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Leon on 29.02.2020.
- * development with love.
- * © Copyright by Papiertuch
- */
 
 public class PostLoginListener implements Listener {
+
+
+    @EventHandler
+    public void onQuit(PlayerDisconnectEvent event) {
+        ProxiedPlayer player = event.getPlayer();
+        VerifyHandler verifyHandler = TeamSpeakBot.getInstance().getVerifyHandler();
+        if (verifyHandler.getRequest().containsKey((TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.useUuids") ? player.getUniqueId().toString() : player.getName()))) {
+            verifyHandler.getRequest().remove((TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.useUuids") ? player.getUniqueId().toString() : player.getName()));
+        }
+    }
 
     @EventHandler(priority = 64)
     public void onPostLogin(PostLoginEvent event) {

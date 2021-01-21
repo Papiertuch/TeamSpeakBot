@@ -2,12 +2,12 @@
   <artifact type="jar" name="TeamSpeakBot">
     <output-path>$USER_HOME$/Desktop</output-path>
     <root id="archive" name="TeamSpeakBot.jar">
-      <element id="module-output" name="teamspeakbot-proxy" />
       <element id="module-output" name="teamspeakbot-bukkit" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../Jars/okhttp-3.10.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../Jars/okio-1.14.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../Jars/teamspeak3-api-1.2.0-with-dependencies.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../Jars/json-20180813.jar" path-in-jar="/" />
+      <element id="module-output" name="teamspeakbot-proxy" />
     </root>
   </artifact>
 </component>

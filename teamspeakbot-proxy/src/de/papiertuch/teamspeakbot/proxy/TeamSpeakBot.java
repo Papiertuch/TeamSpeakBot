@@ -81,7 +81,7 @@ public class TeamSpeakBot extends Plugin {
                 sendMessage("§cPlease download the latest version");
                 sendMessage("§bDiscord https://papiertu.ch/go/discord/ or Papiertuch#7836");
                 sendMessage("§ehttps://www.spigotmc.org/resources/einbot-teamspeak-verification-and-support-notify.48188/");
-                this.onDisable();
+                return;
             } else if (!newVersion.equalsIgnoreCase(getDescription().getVersion())) {
                 sendMessage("§aA new version is available §8» §f§l" + newVersion);
                 sendMessage("§ehttps://www.spigotmc.org/resources/einbot-teamspeak-verification-and-support-notify.48188/");
