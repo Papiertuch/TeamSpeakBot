@@ -7,11 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9cf0087-53fc-4e29-9a37-382803501a09" name="Default Changelist" comment="push">
-      <change afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/listeners/PlayerQuitListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/PlayerDisconnectListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/BungeeCore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/TeamSpeakBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-bukkit/src/de/papiertuch/teamspeakbot/bukkit/TeamSpeakBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/TeamSpeakBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/TeamSpeakBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/ClientJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/ClientJoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/PostLoginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/listeners/PostLoginListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/utils/VerifyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/src/de/papiertuch/teamspeakbot/proxy/utils/VerifyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamspeakbot-proxy/teamspeakbot-proxy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/teamspeakbot-proxy/teamspeakbot-proxy.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +41,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Jars/json-20180813.jar" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/BungeeCore.jar" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="discord-application" />

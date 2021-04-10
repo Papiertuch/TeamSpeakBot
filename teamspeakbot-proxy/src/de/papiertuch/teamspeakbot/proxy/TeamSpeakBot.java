@@ -148,8 +148,12 @@ public class TeamSpeakBot extends Plugin {
                 }
             }
             ts3ApiAsync.getClients().onSuccess(clients -> clients.forEach(client -> {
-                if (hasVPN(client.getIp())) {
-                    TeamSpeakBot.getInstance().getTs3ApiAsync().kickClientFromServer(TeamSpeakBot.getInstance().getConfigHandler().getString("message.teamSpeak.kickReason"), client.getId());
+                if (TeamSpeakBot.getInstance().hasVPN(client.getIp())) {
+                    for (int i = 0; i < client.getServerGroups().length; ++i) {
+                        if (!TeamSpeakBot.getInstance().getConfigHandler().getBotList().contains(String.valueOf(client.getServerGroups()[i]))) {
+                            TeamSpeakBot.getInstance().getTs3ApiAsync().kickClientFromServer(TeamSpeakBot.getInstance().getConfigHandler().getString("message.teamSpeak.kickReason"), client);
+                        }
+                    }
                 }
             }));
         }, 1, 1, TimeUnit.MINUTES);

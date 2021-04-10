@@ -5,6 +5,7 @@ import com.github.theholywaffle.teamspeak3.api.wrapper.ClientInfo;
 import de.papiertuch.teamspeakbot.proxy.TeamSpeakBot;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -151,22 +152,6 @@ public class VerifyHandler {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public Integer getIconFromURL(String string) {
-        Integer iconId = null;
-        try {
-            URL url = new URL(string);
-            InputStream inputStream = url.openStream();
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            byteArrayOutputStream.flush();
-            ImageIO.write(ImageIO.read(inputStream), "PNG", byteArrayOutputStream);
-            iconId = TeamSpeakBot.getInstance().getTs3ApiAsync().uploadIconDirect(byteArrayOutputStream.toByteArray()).getUninterruptibly().intValue();
-            byteArrayOutputStream.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return iconId;
     }
 
     private Integer getIconAsInteger(String name) {

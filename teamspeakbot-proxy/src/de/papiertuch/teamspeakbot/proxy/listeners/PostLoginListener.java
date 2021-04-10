@@ -56,7 +56,6 @@ public class PostLoginListener implements Listener {
                 }
             }
         }, 1, TimeUnit.SECONDS);
-
         if (TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.enable")) {
             if (TeamSpeakBot.getInstance().getVerifyHandler().isExists((TeamSpeakBot.getInstance().getConfigHandler().getBoolean("module.verify.useUuids") ? player.getUniqueId().toString() : player.getName()))) {
                 int rank = TeamSpeakBot.getInstance().getVerifyHandler().getCurrentRank(player);
