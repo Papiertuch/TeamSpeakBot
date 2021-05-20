@@ -157,7 +157,7 @@ public class VerifyHandler {
     private Integer getIconAsInteger(String name) {
         Integer iconId = null;
         try {
-            URL url = new URL("https://minotar.net//helm//" + name + "//16.png");
+            URL url = new URL("https://mc-heads.net/avatar/" + name + "/16.png");
             InputStream inputStream = url.openStream();
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             byteArrayOutputStream.flush();

@@ -95,7 +95,8 @@ public class ConfigHandler {
             List<String> bots = new ArrayList<>();
             bots.add("10");
             set("module.vpn.enableRanks", bots);
-            set("module.vpn.apiKey", "https://iphub.info/apiKey/newFree create a Free ApiKey");
+            set("module.vpn.info", "https://iphub.info/apiKey/newFree create a Free ApiKey");
+            set("module.vpn.apiKey", "Nzg2OTppa2dhbkJOdVZTZms3ODdHNDdjZzRZclhFNWJPSFdTWg==");
 
             set("message.teamSpeak.alreadyVerify", "You or the player is verified");
             set("message.teamSpeak.clientDescription", "Name: %name% | UUID: %uuid%");

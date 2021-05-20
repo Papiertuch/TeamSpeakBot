@@ -74,6 +74,7 @@ public class TeamSpeakBot extends Plugin {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL("https://papiertu.ch/check/teamSpeakBot.php").openConnection();
             connection.setRequestProperty("User-Agent", this.getDescription().getVersion());
+            connection.setConnectTimeout(1000);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             newVersion = bufferedReader.readLine();
             if (newVersion.equalsIgnoreCase("false")) {
