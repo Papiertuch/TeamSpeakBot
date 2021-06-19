@@ -82,7 +82,7 @@ public class TeamSpeakBot extends Plugin {
             System.out.println("[BedWars] No connection to the WebServer could be established, you will not receive update notifications");
         }
 
-        new Metrics(this, 11741);
+        new Metrics(this, 11743);
 
         if (configHandler.getBoolean("module.verify.enable")) {
             mySQL.createTable();
