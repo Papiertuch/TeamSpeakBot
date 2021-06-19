@@ -7,6 +7,7 @@ import com.github.theholywaffle.teamspeak3.api.reconnect.ReconnectStrategy;
 import de.papiertuch.teamspeakbot.bukkit.api.EinBotApi;
 import de.papiertuch.teamspeakbot.bukkit.commands.VerifyCommand;
 import de.papiertuch.teamspeakbot.bukkit.listeners.*;
+import de.papiertuch.teamspeakbot.bukkit.metrics.Metrics;
 import de.papiertuch.teamspeakbot.bukkit.utils.ConfigHandler;
 import de.papiertuch.teamspeakbot.bukkit.utils.MySQL;
 import de.papiertuch.teamspeakbot.bukkit.utils.VerifyHandler;
@@ -21,10 +22,12 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -63,24 +66,15 @@ public class TeamSpeakBot extends JavaPlugin {
         System.out.print("> Java: " + System.getProperty("java.version") + " System: " + System.getProperty("os.name"));
         System.out.print("   ");
 
-        try {
-            HttpURLConnection connection = (HttpURLConnection) new URL("https://papiertu.ch/check/teamSpeakBot.php").openConnection();
-            connection.setRequestProperty("User-Agent", this.getDescription().getVersion());
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            newVersion = bufferedReader.readLine();
-            if (newVersion.equalsIgnoreCase("false")) {
-                sendMessage("§cYou have a version that's been deactivated");
-                sendMessage("§cPlease download the latest version");
-                sendMessage("§bDiscord https://papiertu.ch/go/discord/ or Papiertuch#7836");
-                sendMessage("§ehttps://www.spigotmc.org/resources/einbot-teamspeak-verification-and-support-notify.48188/");
-                return;
-            } else if (!newVersion.equalsIgnoreCase(getDescription().getVersion())) {
-                sendMessage("§aThere is a new version available §8» §f§l" + newVersion);
-                sendMessage("§ehttps://www.spigotmc.org/resources/einbot-teamspeak-verification-and-support-notify.48188/");
+        try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + 48188).openStream(); Scanner scanner = new Scanner(inputStream)) {
+            if (scanner.hasNext()) {
+                newVersion = scanner.next();
             }
-        } catch (IOException e) {
-            sendMessage("§cNo connection to the WebServer could be established, you will not receive update notifications");
+        } catch (IOException exception) {
+            System.out.println("[BedWars] No connection to the WebServer could be established, you will not receive update notifications");
         }
+
+        new Metrics(this, 11741);
 
         verifyHandler = new VerifyHandler();
         einBotApi = new EinBotApi();
